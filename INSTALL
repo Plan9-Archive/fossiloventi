@@ -4,11 +4,14 @@
 cp manpages/fossil.4 /sys/man/4/fossil
 cp manpages/fossilcons.8 /sys/man/8/fossilcons
 cp manpages/loadfossil.8 /sys/man/8/loadfossil
+cp oventi.h /sys/include/oventi.h
 mkdir /sys/src/liboventi
-bind liboventi /sys/src/liboventi
+bind -c liboventi /sys/src/liboventi
 mkdir /sys/src/cmd/fossil
-bind fossil /sys/src/cmd/fossil
+bind -c fossil /sys/src/cmd/fossil
 cd /sys/src/liboventi
 mk install
 cd /sys/src/cmd/fossil
 mk install
+cd ..
+echo 'Fossil installed, hopefully'
