@@ -1,0 +1,14 @@
+#!/bin/rc
+# Installs liboventi, fossil, and manpages
+
+cp manpages/fossil.4 /sys/man/4/fossil
+cp manpages/fossilcons.8 /sys/man/8/fossilcons
+cp manpages/loadfossil.8 /sys/man/8/loadfossil
+mkdir /sys/src/liboventi
+bind liboventi /sys/src/liboventi
+mkdir /sys/src/cmd/fossil
+bind fossil /sys/src/cmd/fossil
+cd /sys/src/liboventi
+mk install
+cd /sys/src/cmd/fossil
+mk install

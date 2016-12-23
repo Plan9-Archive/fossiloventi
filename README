@@ -1,0 +1,3 @@
+This repo is a copy of fossil and its needed library and manpages, taken from the Bell Labs sources server. It contains no original code or modifications.
+
+run INSTALL to add fossil to your 9front installation. I recommend using fossil in combination with Venti, making frequent archival snapshots, and storing the resulting rootscores. I find fossil+venti useful for its features, but I would not recommend using fossil alone and no matter what, backup your data. No warranties and don't blame me if there are issues. I believe there is a partially rewritten fossil in the 9legacy distribution, which you might try also.
