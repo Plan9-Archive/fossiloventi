@@ -5,6 +5,7 @@ cp manpages/fossil.4 /sys/man/4/fossil
 cp manpages/fossilcons.8 /sys/man/8/fossilcons
 cp manpages/loadfossil.8 /sys/man/8/loadfossil
 cp oventi.h /sys/include/oventi.h
+mkdir /$objtype/bin/fossil
 mkdir /sys/src/liboventi
 bind -c liboventi /sys/src/liboventi
 mkdir /sys/src/cmd/fossil
