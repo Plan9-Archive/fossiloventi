@@ -1,6 +1,7 @@
 #!/bin/rc
 # Installs liboventi, fossil, and manpages
 
+ape/patch -p4 <fossil-wstat-qid.diff
 cp manpages/fossil.4 /sys/man/4/fossil
 cp manpages/fossilcons.8 /sys/man/8/fossilcons
 cp manpages/loadfossil.8 /sys/man/8/loadfossil

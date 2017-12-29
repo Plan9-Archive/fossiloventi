@@ -1,6 +1,6 @@
 This repo is a copy of fossil and its needed library and manpages,
 taken from the Bell Labs sources server.  It contains no original code
-or modifications.
+and the only modification is a small patch from 9legacy.
 
 run INSTALL to add fossil to your 9front installation.  I recommend
 using fossil in combination with Venti, making frequent archival

@@ -1,0 +1,48 @@
+--- /n/sources/plan9/sys/src/cmd/fossil/9p.c	Fri Aug  2 22:27:41 2013
++++ /sys/src/cmd/fossil/9p.c	Thu Nov 10 00:00:00 2016
+@@ -361,6 +361,10 @@ rTwstat(Msg* m)
+ 	else
+ 		retval = 1;
+ 
++	fid->qid.vers = fileGetMcount(fid->file);
++	m->r.qid = fid->qid;
++	m->r.iounit = m->con->msize-IOHDRSZ;
++
+ 	if(tsync){
+ 		/*
+ 		 * All values were defaulted,
+--- /n/sources/plan9/sys/src/cmd/fossil/file.c	Fri Aug  2 22:27:41 2013
++++ /sys/src/cmd/fossil/file.c	Thu Nov 10 00:00:00 2016
+@@ -807,6 +807,7 @@ fileSetDir(File *f, DirEntry *dir, char *uid)
+ 	char *oelem;
+ 	u32int mask;
+ 	u64int size;
++	int changed;
+ 
+ 	/* can not set permissions for the root */
+ 	if(fileIsRoot(f)){
+@@ -844,6 +845,7 @@ fileSetDir(File *f, DirEntry *dir, char *uid)
+ 
+ 	if(!sourceLock2(f->source, f->msource, -1))
+ 		goto Err;
++	changed = 0;
+ 	if(!fileIsDir(f)){
+ 		size = sourceGetSize(f->source);
+ 		if(size != dir->size){
+@@ -853,6 +855,7 @@ fileSetDir(File *f, DirEntry *dir, char *uid)
+ 					sourceUnlock(f->msource);
+ 				goto Err;
+ 			}
++			changed = 1;
+ 			/* commited to changing it now */
+ 		}
+ 	}
+@@ -895,6 +898,8 @@ fileSetDir(File *f, DirEntry *dir, char *uid)
+ 	fileMetaUnlock(f);
+ 	fileUnlock(f);
+ 
++	if(changed)
++		fileWAccess(f, uid);
+ 	fileWAccess(f->up, uid);
+ 
+ 	return 1;
